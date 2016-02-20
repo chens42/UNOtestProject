@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">UnoApp</string>
+    <string name="base_url">http://images.unoapp.com/boxdata/asset11543/images/content.csv</string>
+</resources>
