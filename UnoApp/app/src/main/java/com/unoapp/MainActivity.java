@@ -45,7 +45,7 @@ public class MainActivity extends BaseActivity {
         fileService = new FileService(this);
         setContentView(R.layout.activity_main);
         animRotate = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.image_rotation);
-        String url = "http://images.unoapp.com/boxdata/asset11543/images/content.csv";
+        String url = getResources().getString(R.string.base_url);
         progressBar = (ProgressBar) findViewById(R.id.progress);
         imageHolder = (LinearLayout) findViewById(R.id.images);
         new DownloadFileAsync().execute(url);
@@ -126,12 +126,12 @@ public class MainActivity extends BaseActivity {
         imageHolder.setVisibility(View.VISIBLE);
         List<DetailObject> detailObjects = saveImageFinishEvent.getDetailObjects();
         for (int i = 1; i < detailObjects.size(); i++) {
-            ImageView childAtImageView = (ImageView) imageHolder.getChildAt(i - 1);
-            Picasso.with(this).load(fileService.getFileFromStorage(detailObjects.get(i).getId())).into(childAtImageView);
-            childAtImageView.setAnimation(animRotate);
+            ImageView imageView = new ImageView(MainActivity.this);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(200, 200);
+            imageView.setLayoutParams(layoutParams);
+            Picasso.with(this).load(fileService.getFileFromStorage(detailObjects.get(i).getId())).into(imageView);
+            imageHolder.addView(imageView);
+            imageView.setAnimation(animRotate);
         }
-
     }
-
-
 }
